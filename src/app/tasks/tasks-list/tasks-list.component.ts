@@ -11,10 +11,13 @@ import { TasksService } from '../tasks.service';
   imports: [TaskItemComponent],
 })
 export class TasksListComponent {
+  // dùng inject để truy cập vào TasksService
   private tasksService = inject(TasksService);
+  // dùng signal để tạo biến phản ứng có giá trị ban đầu là all
   selectedFilter = signal<string>('all');
 
-  // tasks = this.tasksService.allTasks;
+  // Khi thay đổi bộ lọc thông qua onChangeTasksFilter, giá trị của selectedFilter thay đổi.
+  // computed tự động tính toán lại danh sách tasks dựa trên giá trị mới của selectedFilter.
   tasks = computed(() => {
     switch (this.selectedFilter()) {
       case 'all':
@@ -37,6 +40,7 @@ export class TasksListComponent {
   });
 
   onChangeTasksFilter(filter: string) {
+    // Sử dụng phương thức set của selectedFilter để cập nhật giá trị bộ lọc mới.
     this.selectedFilter.set(filter);
   }
 }
