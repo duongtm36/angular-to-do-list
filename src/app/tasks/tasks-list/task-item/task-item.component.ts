@@ -28,8 +28,10 @@ export class TaskItemComponent {
   });
 
   onChangeTaskStatus(taskId: string, status: string) {
+    // tạo biến newStatus và gán giá trị mặc định là 'OPEN'
     let newStatus: TaskStatus = 'OPEN';
 
+    // tạo switch case để thay đổi giá trị của biến newStatus ty theo giá trị của biến status
     switch (status) {
       case 'open':
         newStatus = 'OPEN';
@@ -44,6 +46,7 @@ export class TaskItemComponent {
         break;
     }
 
+    // gọi hàm updateTaskStatus từ tasksService để cập nhật trạng thái của task
     this.tasksService.updateTaskStatus(taskId, newStatus);
   }
 }
